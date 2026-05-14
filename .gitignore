@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+### Seguridad y Credenciales ###
+# Ignorar archivos de logs generados por SLF4J
+*.log
+
+# IMPORTANTE: Ignorar application.properties para no subir la contraseña ni el secreto JWT a GitHub
+src/main/resources/application.properties
+>>>>>>> ba6528f (feat: estructura ms-suscripciones con seguridad jwt y flyway)

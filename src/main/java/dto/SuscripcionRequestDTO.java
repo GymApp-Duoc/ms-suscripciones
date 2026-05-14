@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.dto;
+package dto;
 
 import jakarta.validation.constraints.NotNull;
 

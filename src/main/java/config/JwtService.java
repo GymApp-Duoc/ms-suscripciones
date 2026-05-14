@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.config;
+package config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

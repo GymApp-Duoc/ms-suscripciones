@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.config;
+package config;
 
 import feign.RequestInterceptor;
 import org.springframework.context.annotation.Bean;

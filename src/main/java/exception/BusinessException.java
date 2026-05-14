@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.exception;
+package exception;
 
 public class BusinessException extends RuntimeException {
     public BusinessException(String message) {

@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.config;
+package config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final com.gymapp.ms_suscripciones.config.JwtService jwtService;
+    private final JwtService jwtService;
 
     @Override
     protected void doFilterInternal(

@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.exception;
+package exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

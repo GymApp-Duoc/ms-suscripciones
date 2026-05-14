@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.model;
+package model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

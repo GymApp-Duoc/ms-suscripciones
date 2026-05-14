@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.exception;
+package exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +14,13 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(com.gymapp.ms_suscripciones.exception.ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleResourceNotFound(com.gymapp.ms_suscripciones.exception.ResourceNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceNotFound(ResourceNotFoundException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(com.gymapp.ms_suscripciones.exception.BusinessException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessException(com.gymapp.ms_suscripciones.exception.BusinessException ex) {
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Map<String, Object>> handleBusinessException(BusinessException ex) {
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 

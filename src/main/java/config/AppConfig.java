@@ -1,4 +1,4 @@
-package com.gymapp.ms_suscripciones.config;
+package config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.gymapp.ms_suscripciones.repository;
+package repository;
 
-import com.gymapp.ms_suscripciones.model.Suscripcion;
+import model.Suscripcion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

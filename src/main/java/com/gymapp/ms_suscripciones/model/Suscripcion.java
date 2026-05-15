@@ -1,20 +1,19 @@
-package model;
+package com.gymapp.ms_suscripciones.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "suscripciones")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Suscripcion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,9 +21,8 @@ public class Suscripcion {
     @Column(name = "miembro_id", nullable = false)
     private Long miembroId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id", nullable = false)
-    private Plan plan;
+    @Column(name = "tipo_plan", nullable = false, length = 50)
+    private String tipoPlan;
 
     @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
@@ -32,7 +30,10 @@ public class Suscripcion {
     @Column(name = "fecha_fin", nullable = false)
     private LocalDate fechaFin;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String estado;
+
+    @Column(nullable = false)
+    private Double precio;
 }
 

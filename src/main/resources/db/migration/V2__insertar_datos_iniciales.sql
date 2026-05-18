@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 DELETE FROM suscripciones WHERE miembro_id IN (1, 2, 3);
 
+=======
+>>>>>>> 2329ddfafd2807ef76087cf2cadf54eb772f4c8f
 INSERT INTO suscripciones (miembro_id, tipo_plan, fecha_inicio, fecha_fin, estado, precio)
 VALUES (1, 'MENSUAL', '2026-05-01', '2026-06-01', 'ACTIVA', 29990.0);
 

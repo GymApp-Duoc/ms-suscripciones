@@ -1,6 +1,8 @@
 package com.gymapp.ms_suscripciones.service;
 
 import com.gymapp.ms_suscripciones.client.MiembroClient;
+import com.gymapp.ms_suscripciones.client.NotificacionClient;
+import com.gymapp.ms_suscripciones.dto.NotificacionRequestDTO;
 import com.gymapp.ms_suscripciones.dto.SuscripcionRequestDTO;
 import com.gymapp.ms_suscripciones.dto.SuscripcionResponseDTO;
 import com.gymapp.ms_suscripciones.exception.BusinessException;
@@ -25,6 +27,7 @@ public class SuscripcionService implements SuscripcionServiceInt {
 
     private final SuscripcionRepository repository;
     private final MiembroClient miembroClient;
+    private final NotificacionClient notificacionClient;
 
     @Override
     @Transactional(readOnly = true)
@@ -51,6 +54,7 @@ public class SuscripcionService implements SuscripcionServiceInt {
     public SuscripcionResponseDTO crear(SuscripcionRequestDTO dto) {
         validarMiembroExterno(dto.getMiembroId());
 
+
         if (repository.existsByMiembroIdAndEstado(dto.getMiembroId(), "ACTIVA")) {
             throw new BusinessException("El miembro ya posee una suscripción ACTIVA.");
         }
@@ -66,7 +70,23 @@ public class SuscripcionService implements SuscripcionServiceInt {
         suscripcion.setEstado("ACTIVA");
         suscripcion.setPrecio(dto.getPrecio());
 
-        return mapearADto(repository.save(suscripcion));
+
+        Suscripcion guardada = repository.save(suscripcion);
+
+
+        try {
+            NotificacionRequestDTO notificacion = NotificacionRequestDTO.builder()
+                    .miembroId(guardada.getMiembroId())
+                    .titulo("Suscripción Activada")
+                    .mensaje("¡Éxito! Tu plan " + guardada.getTipoPlan() + " está activo hasta el " + guardada.getFechaFin())
+                    .build();
+            notificacionClient.enviarNotificacion(notificacion);
+            log.info("Notificación de éxito enviada al miembro ID: {}", guardada.getMiembroId());
+        } catch (Exception e) {
+            log.error("La suscripción se creó, pero falló el envío de la notificación: {}", e.getMessage());
+        }
+
+        return mapearADto(guardada);
     }
 
     @Override

@@ -40,6 +40,25 @@ public class SuscripcionController {
         return ResponseEntity.ok(service.buscarPorMiembro(miembroId));
     }
 
+
+    @GetMapping("/miembro/{miembroId}/estado")
+    public ResponseEntity<Void> verificarEstado(@PathVariable Long miembroId) {
+        log.info("Petición REST recibida: Verificar estado de suscripción para el miembro ID {}", miembroId);
+        List<SuscripcionResponseDTO> suscripciones = service.buscarPorMiembro(miembroId);
+
+
+        boolean tieneSuscripcionActiva = suscripciones.stream()
+                .anyMatch(s -> "ACTIVA".equalsIgnoreCase(s.getEstado()));
+
+        if (tieneSuscripcionActiva) {
+            log.info("El miembro ID {} SI tiene una suscripción activa. Respondiendo 200 OK.", miembroId);
+            return ResponseEntity.ok().build(); // 200 OK -> Feign pasa limpio
+        }
+
+        log.warn("El miembro ID {} NO tiene ninguna suscripción activa. Respondiendo 404.", miembroId);
+        return ResponseEntity.notFound().build(); // 404 Not Found -> Feign gatilla la excepción
+    }
+
     @PostMapping
     public ResponseEntity<SuscripcionResponseDTO> crear(@Valid @RequestBody SuscripcionRequestDTO dto) {
         log.info("Petición REST recibida: Crear nueva suscripción para miembro ID {}", dto.getMiembroId());
